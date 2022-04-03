@@ -36,5 +36,8 @@ const mbApi = new MusicbrainzApi(config);
 
 //Don't touch above this line
 
-const artist = await mbApi.lookupArtist({query: 'ab2528d9-719f-4261-8098-21849222a0f2'});
-const findArtist = document.getElementById('')
+
+const findArtist = document.getElementById('artistSearch').value
+findArtist.addEventListener('click', () => {
+    const artist = await mbApi.lookupArtist({query: 'ab2528d9-719f-4261-8098-21849222a0f2'});
+})
