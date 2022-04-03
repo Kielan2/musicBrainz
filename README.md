@@ -1,1 +1,1 @@
-# musicBrainz
+# spotifyAPI project
