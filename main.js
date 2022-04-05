@@ -1,44 +1,22 @@
-const MusicBrainzApi = require('musicbrainz-api').MusicBrainzApi;
-
-const mbApi = new MusicBrainzApi({
-  appName: 'my-app',
-  appVersion: '0.1.0',
-  appContactInfo: 'user@mail.org'
-});
-
-import {MusicBrainzApi} from '../src/musicbrainz-api';
-
-const config = {
-  // MusicBrainz bot account username & password (optional)
-  botAccount: { 
-    username: 'myUserName_bot',
-    password: 'myPassword' 
-  },
+const APIController = (function() {
   
-  // API base URL, default: 'https://musicbrainz.org' (optional)
-  baseUrl: 'https://musicbrainz.org',
 
-  appName: 'my-app',
-  appVersion: '0.1.0',
+  const clientId = ''
+  const clientSecret = ''
 
-  // Optional, default: no proxy server
-  proxy: {
-    host: 'localhost',
-    port: 8888
-   },
+  const _getTOken = async () => {
+     
+    const result = await fetch('https://accounts.spotify.com/api/token', {
+      method: 'POST',
+      headers: {
+        'Content-Type' : 'application/x-www-form-urlencoded',
+        'Authorization' : 'Basic ' + btoa(clientId + ':' + clientSecret)
+      },
+      body: 'grant_type=client_credentials'
+    })
 
-  // Your e-mail address, required for submitting ISRCs
-  appMail: string
-}
+    const data = await result.json()
+    return data.access_token
+  }
 
-const mbApi = new MusicbrainzApi(config);
-
-
-//Don't touch above this line
-
-
-const findArtist = document.getElementById('artistSearch').value
-findArtist.addEventListener('click', () => {
-    const artist = await mbApi.lookupArtist({query: 'ab2528d9-719f-4261-8098-21849222a0f2'});
-    return artist.getElementById('displaySection')
-})
+})()
